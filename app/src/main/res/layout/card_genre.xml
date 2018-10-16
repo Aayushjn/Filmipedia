@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+        android:id="@+id/text_genre"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_toEndOf="@id/img_person_poster"
+        android:textSize="35sp"
+        android:textColor="@color/off_white"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:gravity="center"
+        android:background="@drawable/ic_genre_bg"
+        tools:text="Adventure"/>
+
+</androidx.cardview.widget.CardView>

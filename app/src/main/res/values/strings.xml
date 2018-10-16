@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Filmipedia</string>
+
+    <string name="hello_blank_fragment">Hello blank activity</string>
+    <string name="info_no_favorites">No Favorites Added!</string>
+    <string name="trailer">Trailers</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Search here…</string>
+    <string name="action_browse">Browse</string>
+    <string name="action_home">Home</string>
+    <string name="empty_view">Empty view</string>
+    <string name="movie_poster">Movie poster</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="people">People</string>
+    <string name="placeholder_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus at urna condimentum mattis pellentesque id nibh tortor. Sed vulputate odio ut enim blandit volutpat maecenas.</string>
+    <string name="birthday">Birthday: </string>
+    <string name="deathday">Deathday:</string>
+    <string name="cast">Cast</string>
+    <string name="crew">Crew</string>
+    <string name="share">Share</string>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/view_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:activity="com.aayush.filmipedia.view.activity.DetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            android:textColor="@color/movie_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1"
+            tools:text="Venom"/>
+
+        <TextView
+            android:id="@+id/text_movie_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_overview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_constraintTop_creator="1"
+            tools:text="7.3"/>
+
+        <TextView
+            android:id="@+id/text_release_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_rating"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="Tomorrow"/>
+
+        <TextView
+            android:id="@+id/text_movie_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_title"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trailer"
+            android:textSize="30sp"
+            app:layout_constraintTop_toBottomOf="@id/text_release_date"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@id/text_trailer"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
