@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/view_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:activity="com.aayush.filmipedia.view.activity.PersonDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_person_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            android:textColor="@color/movie_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1"
+            tools:text="Tom Hardy"/>
+
+        <TextView
+            android:id="@+id/text_person_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_person_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="@string/placeholder_text"/>
+
+        <TextView
+            android:id="@+id/text_birthday_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_person_about"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/birthday"/>
+
+        <TextView
+            android:id="@+id/text_person_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:paddingTop="@dimen/padding_layout"
+            android:paddingBottom="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_person_about"
+            app:layout_constraintLeft_toRightOf="@id/text_birthday_label"
+            tools:text="1977-09-15"/>
+
+        <TextView
+            android:id="@+id/text_deathday_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:padding="@dimen/padding_layout"
+            android:text="@string/deathday"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_birthday_label"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/text_person_deathday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:paddingTop="@dimen/padding_layout"
+            android:paddingBottom="@dimen/padding_layout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_person_birthday"
+            app:layout_constraintLeft_toRightOf="@id/text_deathday_label"
+            tools:text="Not dead yet!"/>
+
+        <TextView
+            android:id="@+id/text_cast_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:text="@string/cast"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/text_deathday_label"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@id/text_cast_label"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_crew_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:text="@string/crew"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_cast"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_crew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@id/text_crew_label"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

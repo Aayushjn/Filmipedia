@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    app:cardCornerRadius="@dimen/card_trailer_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_person_poster"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/movie_poster"
+            tools:src="@drawable/ic_empty_view"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/text_person_name"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_toEndOf="@id/img_person_poster"
+            android:textSize="@dimen/movie_title"
+            android:textColor="@color/movie_title"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            tools:text="Big title" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

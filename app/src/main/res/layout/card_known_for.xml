@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_movie_poster"
+            android:layout_width="150dp"
+            android:layout_height="175dp"
+            tools:src="@drawable/ic_empty_view"
+            android:contentDescription="@string/movie_poster" />
+
+        <TextView
+            android:id="@+id/text_movie_title"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/img_movie_poster"
+            android:textColor="@color/movie_title"
+            android:textSize="20sp"
+            android:gravity="center"
+            tools:text="Really, really long title for a movie"/>
+
+        <TextView
+            android:id="@+id/text_character"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_movie_title"
+            android:textSize="18sp"
+            android:gravity="center"
+            tools:text="Generic character name"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
