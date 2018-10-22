@@ -2,6 +2,8 @@ package com.aayush.filmipedia.util.api;
 
 import com.aayush.filmipedia.model.CreditsResponse;
 import com.aayush.filmipedia.model.GenreResponse;
+import com.aayush.filmipedia.model.Movie;
+import com.aayush.filmipedia.model.MovieCreditsResponse;
 import com.aayush.filmipedia.model.MovieResponse;
 import com.aayush.filmipedia.model.Person;
 import com.aayush.filmipedia.model.PersonResponse;
@@ -18,20 +20,17 @@ public interface RestApi {
                                                @Query("page") Long page,
                                                @Query("region") String region);
 
-    @GET("movie/top_rated")
-    Observable<MovieResponse> getTopRatedMovies(@Query("api_key") String apiKey,
-                                                @Query("page") Long page,
-                                                @Query("region") String region);
-
-    @GET("movie/{movie_id}/videos")
-    Observable<TrailerResponse> getMovieTrailers(@Path("movie_id") Long id,
-                                           @Query("api_key") String apiKey);
-
     @GET("search/movie")
     Observable<MovieResponse> searchMovies(@Query("api_key") String apiKey,
                                            @Query("query") String query,
                                            @Query("page") Long page,
                                            @Query("region") String region);
+
+    @GET("search/person")
+    Observable<PersonResponse> searchPeople(@Query("api_key") String apiKey,
+                                            @Query("query") String query,
+                                            @Query("page") Long page,
+                                            @Query("region") String region);
 
     @GET("genre/movie/list")
     Observable<GenreResponse> getMovieGenres(@Query("api_key") String apiKey);
@@ -45,6 +44,18 @@ public interface RestApi {
     @GET("person/popular")
     Observable<PersonResponse> getPopularPeople(@Query("api_key") String apiKey,
                                                 @Query("page") Long page);
+
+    @GET("movie/{movie_id}")
+    Observable<Movie> getMovieById(@Path("movie_id") Long id,
+                                   @Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/credits")
+    Observable<MovieCreditsResponse> getMovieCredits(@Path("movie_id") Long id,
+                                                     @Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/videos")
+    Observable<TrailerResponse> getMovieTrailers(@Path("movie_id") Long id,
+                                           @Query("api_key") String apiKey);
 
     @GET("person/{person_id}")
     Observable<Person> getPersonById(@Path("person_id") Long id,

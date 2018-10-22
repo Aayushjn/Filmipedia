@@ -3,9 +3,6 @@ package com.aayush.filmipedia.view.fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -92,28 +89,6 @@ public class MainFragment extends Fragment {
         });
 
         return view;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (args == null) {
-            inflater.inflate(R.menu.menu_main, menu);
-        }
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.item_menu_settings:
-                // TODO: Add settings menu
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

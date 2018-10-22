@@ -21,7 +21,7 @@
             android:layout_marginStart="@dimen/layout_margin_start"
             android:layout_marginTop="@dimen/layout_margin_top"
             android:padding="@dimen/padding_layout"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textColor="@color/movie_title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,28 +30,53 @@
             tools:text="Venom"/>
 
         <TextView
+            android:id="@+id/text_rating_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:padding="@dimen/padding_layout"
+            android:text="@string/rating"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_overview"/>
+
+        <TextView
             android:id="@+id/text_movie_rating"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/layout_margin_start"
             android:layout_marginTop="@dimen/layout_margin_top"
             android:padding="@dimen/padding_layout"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/text_movie_overview"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/text_rating_label"
             tools:layout_constraintTop_creator="1"
             tools:text="7.3"/>
 
         <TextView
-            android:id="@+id/text_release_date"
-            android:layout_width="match_parent"
+            android:id="@+id/text_release_date_label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/layout_margin_start"
             android:layout_marginTop="@dimen/layout_margin_top"
             android:padding="@dimen/padding_layout"
+            android:text="@string/release_date"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_movie_rating"/>
+
+        <TextView
+            android:id="@+id/text_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:paddingTop="@dimen/padding_layout"
+            android:paddingBottom="@dimen/padding_layout"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/text_movie_rating"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/text_release_date_label"
             tools:text="Tomorrow"/>
 
         <TextView
@@ -63,6 +88,53 @@
             android:padding="@dimen/padding_layout"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/text_movie_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="@string/placeholder_text"/>
+
+        <TextView
+            android:id="@+id/text_movie_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cast"
+            android:textSize="30sp"
+            android:padding="@dimen/padding_layout"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            app:layout_constraintTop_toBottomOf="@id/text_release_date"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/text_movie_cast"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_movie_crew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/crew"
+            android:textSize="30sp"
+            android:padding="@dimen/padding_layout"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_cast"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_crew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/text_movie_crew"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <TextView
@@ -71,13 +143,18 @@
             android:layout_height="wrap_content"
             android:text="@string/trailer"
             android:textSize="30sp"
-            app:layout_constraintTop_toBottomOf="@id/text_release_date"
+            android:padding="@dimen/padding_layout"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_crew"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_trailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
             android:clipToPadding="false"
             android:scrollbars="vertical"
             app:layout_constraintTop_toBottomOf="@id/text_trailer"

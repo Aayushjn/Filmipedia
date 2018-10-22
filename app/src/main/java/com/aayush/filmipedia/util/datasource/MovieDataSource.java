@@ -61,22 +61,6 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
                             throwable.getMessage())))
             );
         }
-        else if ("top".equals(type)) {
-            compositeDisposable.add(application.getRestApi()
-                    .getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_KEY, 1L,
-                            application.getCountryCode())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(movieResponse -> {
-                        initialLoading.postValue(NetworkState.LOADED);
-                        networkState.postValue(NetworkState.LOADED);
-
-                        callback.onResult(movieResponse.getResults(),
-                                null, 1L);
-                    }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
-                            throwable.getMessage())))
-            );
-        }
         else {
             compositeDisposable.add(application.getRestApi()
                     .getMoviesByGenre(BuildConfig.THE_MOVIE_DB_API_KEY, 1L,
@@ -110,21 +94,6 @@ public class MovieDataSource extends PageKeyedDataSource<Long, Movie> {
         if ("pop".equals(type)) {
             compositeDisposable.add(application.getRestApi()
                     .getPopularMovies(BuildConfig.THE_MOVIE_DB_API_KEY, (long) params.requestedLoadSize,
-                            application.getCountryCode())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(movieResponse -> {
-                        Long nextKey = (params.key == movieResponse.getTotalResults()) ?
-                                null : params.key + 1;
-                        callback.onResult(movieResponse.getResults(), nextKey);
-                        networkState.postValue(NetworkState.LOADED);
-                    }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
-                            throwable.getMessage())))
-            );
-        }
-        else if ("top".equals(type)) {
-            compositeDisposable.add(application.getRestApi()
-                    .getTopRatedMovies(BuildConfig.THE_MOVIE_DB_API_KEY, (long) params.requestedLoadSize,
                             application.getCountryCode())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

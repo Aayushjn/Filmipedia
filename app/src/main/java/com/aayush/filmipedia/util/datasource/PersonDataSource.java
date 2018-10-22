@@ -5,6 +5,8 @@ import com.aayush.filmipedia.FilmipediaApplication;
 import com.aayush.filmipedia.model.PersonResult;
 import com.aayush.filmipedia.util.NetworkState;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
@@ -19,10 +21,13 @@ public class PersonDataSource extends PageKeyedDataSource<Long, PersonResult> {
     private MutableLiveData<NetworkState> initialLoading;
     private CompositeDisposable compositeDisposable;
 
+    private String query;
+
     public PersonDataSource(FilmipediaApplication application,
-                            CompositeDisposable compositeDisposable) {
+                            CompositeDisposable compositeDisposable, String query) {
         this.application = application;
         this.compositeDisposable = compositeDisposable;
+        this.query = query;
 
         networkState = new MutableLiveData<>();
         initialLoading = new MutableLiveData<>();
@@ -42,18 +47,35 @@ public class PersonDataSource extends PageKeyedDataSource<Long, PersonResult> {
         initialLoading.postValue(NetworkState.LOADING);
         networkState.postValue(NetworkState.LOADING);
 
-        compositeDisposable.add(application.getRestApi()
-                .getPopularPeople(BuildConfig.THE_MOVIE_DB_API_KEY, 1L)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(personResponse -> {
-                    initialLoading.postValue(NetworkState.LOADED);
-                    networkState.postValue(NetworkState.LOADED);
+        if ("pop".equals(query)) {
+            compositeDisposable.add(application.getRestApi()
+                    .getPopularPeople(BuildConfig.THE_MOVIE_DB_API_KEY, 1L)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(personResponse -> {
+                        initialLoading.postValue(NetworkState.LOADED);
+                        networkState.postValue(NetworkState.LOADED);
 
-                    callback.onResult(personResponse.getResults(),
-                            null, 1L);
-                }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
-                        throwable.getMessage()))));
+                        callback.onResult(personResponse.getResults(),
+                                null, 1L);
+                    }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
+                            throwable.getMessage()))));
+        }
+        else {
+            compositeDisposable.add(application.getRestApi()
+                    .searchPeople(BuildConfig.THE_MOVIE_DB_API_KEY, query, 1L,
+                            application.getCountryCode())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(personResponse -> {
+                        initialLoading.postValue(NetworkState.LOADED);
+                        networkState.postValue(NetworkState.LOADED);
+
+                        callback.onResult(personResponse.getResults(),
+                                null, 1L);
+                    }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
+                            throwable.getMessage()))));
+        }
     }
 
     @Override
@@ -67,17 +89,34 @@ public class PersonDataSource extends PageKeyedDataSource<Long, PersonResult> {
                           @NonNull LoadCallback<Long, PersonResult> callback) {
         networkState.postValue(NetworkState.LOADING);
 
-        compositeDisposable.add(application.getRestApi()
-                .getPopularPeople(BuildConfig.THE_MOVIE_DB_API_KEY, (long) params.requestedLoadSize)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(personResponse -> {
-                    Long nextKey = (params.key == personResponse.getTotalPages()) ?
-                            null : params.key + 1;
-                    callback.onResult(personResponse.getResults(), nextKey);
-                    networkState.postValue(NetworkState.LOADED);
-                }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
-                        throwable.getMessage())))
-        );
+        if ("pop".equals(query)) {
+            compositeDisposable.add(application.getRestApi()
+                    .getPopularPeople(BuildConfig.THE_MOVIE_DB_API_KEY, (long) params.requestedLoadSize)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(personResponse -> {
+                        Long nextKey = (params.key.equals(personResponse.getTotalPages())) ?
+                                null : params.key + 1;
+                        callback.onResult(personResponse.getResults(), nextKey);
+                        networkState.postValue(NetworkState.LOADED);
+                    }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
+                            throwable.getMessage())))
+            );
+        }
+        else {
+            compositeDisposable.add(application.getRestApi()
+                    .searchPeople(BuildConfig.THE_MOVIE_DB_API_KEY, query, (long) params.requestedLoadSize,
+                            application.getCountryCode())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(personResponse -> {
+                        Long nextKey = (Objects.equals(params.key, personResponse.getTotalPages())) ?
+                                null : params.key + 1L;
+                        callback.onResult(personResponse.getResults(), nextKey);
+                        networkState.postValue(NetworkState.LOADED);
+                    }, throwable -> networkState.postValue(new NetworkState(NetworkState.Status.FAILED,
+                            throwable.getMessage())))
+            );
+        }
     }
 }
