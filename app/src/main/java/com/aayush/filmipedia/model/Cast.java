@@ -1,4 +1,3 @@
-
 package com.aayush.filmipedia.model;
 
 import com.google.gson.annotations.Expose;

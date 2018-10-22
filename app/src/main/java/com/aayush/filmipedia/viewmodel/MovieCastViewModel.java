@@ -1,10 +1,10 @@
 package com.aayush.filmipedia.viewmodel;
 
 import com.aayush.filmipedia.FilmipediaApplication;
-import com.aayush.filmipedia.model.PersonResult;
+import com.aayush.filmipedia.model.MovieCast;
 import com.aayush.filmipedia.util.NetworkState;
-import com.aayush.filmipedia.util.datasource.PersonDataSource;
-import com.aayush.filmipedia.util.datasource.factory.PersonDataFactory;
+import com.aayush.filmipedia.util.datasource.MovieCastDataSource;
+import com.aayush.filmipedia.util.datasource.factory.MovieCastDataFactory;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -14,26 +14,27 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class PersonViewModel extends ViewModel {
+public class MovieCastViewModel extends ViewModel {
     private LiveData<NetworkState> networkState;
-    private LiveData<PagedList<PersonResult>> personLiveData;
+    private LiveData<PagedList<MovieCast>> movieCastLiveData;
     private FilmipediaApplication application;
     private CompositeDisposable compositeDisposable;
-    private String query;
 
-    public PersonViewModel(@NonNull FilmipediaApplication application, String query) {
+    private Long movieId;
+
+    public MovieCastViewModel(@NonNull FilmipediaApplication application, Long movieId) {
         this.application = application;
-        this.query = query;
+        this.movieId = movieId;
         init();
     }
 
     private void init() {
         compositeDisposable = new CompositeDisposable();
 
-        PersonDataFactory personDataFactory = new PersonDataFactory(application,
-                compositeDisposable, query);
-        networkState = Transformations.switchMap(personDataFactory.getMutableLiveData(),
-                PersonDataSource::getNetworkState);
+        MovieCastDataFactory movieCastDataFactory = new MovieCastDataFactory(application,
+                compositeDisposable, movieId);
+        networkState = Transformations.switchMap(movieCastDataFactory.getMutableLiveData(),
+                MovieCastDataSource::getNetworkState);
 
         PagedList.Config pagedListConfig = new PagedList.Config.Builder()
                 .setPageSize(10)
@@ -41,7 +42,7 @@ public class PersonViewModel extends ViewModel {
                 .setEnablePlaceholders(false)
                 .build();
 
-        personLiveData = new LivePagedListBuilder<>(personDataFactory, pagedListConfig)
+        movieCastLiveData = new LivePagedListBuilder<>(movieCastDataFactory, pagedListConfig)
                 .build();
 
     }
@@ -50,8 +51,8 @@ public class PersonViewModel extends ViewModel {
         return networkState;
     }
 
-    public LiveData<PagedList<PersonResult>> getPersonLiveData() {
-        return personLiveData;
+    public LiveData<PagedList<MovieCast>> getMovieCastLiveData() {
+        return movieCastLiveData;
     }
 
     @Override

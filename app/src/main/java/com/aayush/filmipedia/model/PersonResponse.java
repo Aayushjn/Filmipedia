@@ -15,7 +15,7 @@ public class PersonResponse {
     private int totalResults;
 
     @SerializedName("total_pages")
-    private int totalPages;
+    private Long totalPages;
 
     public int getPage() {
         return page;
@@ -41,11 +41,11 @@ public class PersonResponse {
         this.totalResults = totalResults;
     }
 
-    public int getTotalPages() {
+    public Long getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(int totalPages) {
+    public void setTotalPages(Long totalPages) {
         this.totalPages = totalPages;
     }
 }

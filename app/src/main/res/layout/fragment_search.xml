@@ -5,10 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/btn_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/movies"
+            android:drawableStart="@drawable/ic_movie"
+            android:drawablePadding="10dp"
+            android:textSize="18sp"
+            android:checked="true"
+            android:layout_weight="1"/>
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/btn_person"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/people"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="10dp"
+            android:textSize="18sp"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/radio_group"
         app:searchIcon="@drawable/ic_search"
         app:queryHint="@string/search_hint"
         app:goIcon="@drawable/ic_go" />

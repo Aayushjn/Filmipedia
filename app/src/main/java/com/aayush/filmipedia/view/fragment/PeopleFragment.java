@@ -15,6 +15,7 @@ import com.aayush.filmipedia.viewmodel.PersonViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,7 +50,10 @@ public class PeopleFragment extends Fragment {
 
         init();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity()))
+                        .getSupportActionBar()
+        ).setDisplayHomeAsUpEnabled(true);
 
         return view;
     }
@@ -63,7 +67,7 @@ public class PeopleFragment extends Fragment {
     private void init() {
         resultList = new ArrayList<>();
         personAdapter = new PersonAdapter(getContext(), resultList);
-        personViewModel = new PersonViewModel(FilmipediaApplication.create(getContext()));
+        personViewModel = new PersonViewModel(FilmipediaApplication.create(getContext()), "pop");
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

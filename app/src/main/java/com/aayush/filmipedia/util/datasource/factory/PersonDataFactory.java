@@ -13,17 +13,19 @@ public class PersonDataFactory extends DataSource.Factory<Long, PersonResult> {
     private PersonDataSource personDataSource;
     private FilmipediaApplication application;
     private CompositeDisposable compositeDisposable;
+    private String query;
 
     public PersonDataFactory(FilmipediaApplication application,
-                              CompositeDisposable compositeDisposable) {
+                              CompositeDisposable compositeDisposable, String query) {
         this.application = application;
         this.compositeDisposable = compositeDisposable;
+        this.query = query;
         mutableLiveData = new MutableLiveData<>();
     }
 
     @Override
     public DataSource<Long, PersonResult> create() {
-        personDataSource = new PersonDataSource(application, compositeDisposable);
+        personDataSource = new PersonDataSource(application, compositeDisposable, query);
         mutableLiveData.postValue(personDataSource);
         return personDataSource;
     }

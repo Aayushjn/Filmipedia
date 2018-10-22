@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import com.aayush.filmipedia.FilmipediaApplication;
 import com.aayush.filmipedia.R;
 import com.aayush.filmipedia.model.Movie;
+import com.aayush.filmipedia.model.PersonResult;
 import com.aayush.filmipedia.util.adapter.MovieResultsAdapter;
+import com.aayush.filmipedia.util.adapter.PersonAdapter;
 import com.aayush.filmipedia.viewmodel.MovieResultViewModel;
+import com.aayush.filmipedia.viewmodel.PersonViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,12 +32,18 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class SearchFragment extends Fragment {
-    @BindView(R.id.search_view)     SearchView searchView;
-    @BindView(R.id.movie_results)   RecyclerView recyclerView;
+    @BindView(R.id.btn_movie)     AppCompatRadioButton movieButton;
+    @BindView(R.id.btn_person)    AppCompatRadioButton personButton;
+    @BindView(R.id.search_view)   SearchView searchView;
+    @BindView(R.id.movie_results) RecyclerView recyclerView;
 
     private MovieResultViewModel movieResultViewModel;
     private MovieResultsAdapter movieResultsAdapter;
     private List<Movie> movieList;
+    private PersonViewModel personViewModel;
+    private PersonAdapter personAdapter;
+    private List<PersonResult> personResultList;
+
     private Unbinder unbinder;
 
     public SearchFragment() {}
@@ -61,20 +71,58 @@ public class SearchFragment extends Fragment {
     }
 
     private void initViews() {
-        movieResultViewModel = new MovieResultViewModel(FilmipediaApplication.create(getContext()), "");
+        movieButton.setOnClickListener(v -> {
+            personButton.setChecked(!movieButton.isChecked());
+            movieResultViewModel = new MovieResultViewModel(FilmipediaApplication.create(getContext()),
+                    "");
+            movieList = new ArrayList<>();
+            movieResultsAdapter = new MovieResultsAdapter(getContext(), movieList);
+            movieResultViewModel.getMovieLiveData().observe(SearchFragment.this,
+                    pagedList -> movieResultsAdapter.submitList(pagedList));
+            movieResultViewModel.getNetworkState().observe(SearchFragment.this,
+                    networkState -> movieResultsAdapter.setNetworkState(networkState));
+            recyclerView.setAdapter(movieResultsAdapter);
+        });
+        personButton.setOnClickListener(v -> {
+            movieButton.setChecked(!personButton.isChecked());
+            personViewModel = new PersonViewModel(FilmipediaApplication.create(getContext()),
+                    "");
+            personResultList = new ArrayList<>();
+            personAdapter = new PersonAdapter(getContext(), personResultList);
+            personViewModel.getPersonLiveData().observe(SearchFragment.this,
+                    pagedList -> personAdapter.submitList(pagedList));
+            personViewModel.getNetworkState().observe(SearchFragment.this,
+                    networkState -> personAdapter.setNetworkState(networkState));
+            recyclerView.setAdapter(personAdapter);
+        });
+
+        movieResultViewModel = new MovieResultViewModel(FilmipediaApplication.create(getContext()),
+                "");
         movieList = new ArrayList<>();
         movieResultsAdapter = new MovieResultsAdapter(getContext(), movieList);
+        personViewModel = new PersonViewModel(FilmipediaApplication.create(getContext()),
+                "");
+        personResultList = new ArrayList<>();
+        personAdapter = new PersonAdapter(getContext(), personResultList);
 
         initSearch();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        movieResultViewModel = new MovieResultViewModel(FilmipediaApplication.create(getContext()), "");
-        movieResultViewModel.getMovieLiveData().observe(SearchFragment.this,
-                pagedList -> movieResultsAdapter.submitList(pagedList));
-        movieResultViewModel.getNetworkState().observe(SearchFragment.this,
-                networkState -> movieResultsAdapter.setNetworkState(networkState));
-        recyclerView.setAdapter(movieResultsAdapter);
 
+        if (movieButton.isChecked()) {
+            movieResultViewModel.getMovieLiveData().observe(SearchFragment.this,
+                    pagedList -> movieResultsAdapter.submitList(pagedList));
+            movieResultViewModel.getNetworkState().observe(SearchFragment.this,
+                    networkState -> movieResultsAdapter.setNetworkState(networkState));
+            recyclerView.setAdapter(movieResultsAdapter);
+        }
+        else {
+            personViewModel.getPersonLiveData().observe(SearchFragment.this,
+                    pagedList -> personAdapter.submitList(pagedList));
+            personViewModel.getNetworkState().observe(SearchFragment.this,
+                    networkState -> personAdapter.setNetworkState(networkState));
+            recyclerView.setAdapter(personAdapter);
+        }
     }
 
     private void initSearch() {
@@ -88,6 +136,7 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
+                performSearch(query);
                 return true;
             }
 
@@ -102,12 +151,35 @@ public class SearchFragment extends Fragment {
     }
 
     private void performSearch(String query) {
-        movieResultsAdapter.clear();
-        movieResultViewModel = new MovieResultViewModel(FilmipediaApplication.create(getContext()),
-                query);
-        movieResultViewModel.getMovieLiveData().observe(this,
-                movies -> movieResultsAdapter.submitList(movies));
-        movieResultViewModel.getNetworkState().observe(this,
-                networkState -> movieResultsAdapter.setNetworkState(networkState));
+        if (movieButton.isChecked()) {
+            if (movieResultsAdapter != null) {
+                movieResultsAdapter.clear();
+            }
+            else {
+                movieList = new ArrayList<>();
+                movieResultsAdapter = new MovieResultsAdapter(getContext(), movieList);
+            }
+            movieResultViewModel = new MovieResultViewModel(FilmipediaApplication.create(getContext()),
+                    query);
+            movieResultViewModel.getMovieLiveData().observe(this,
+                    movies -> movieResultsAdapter.submitList(movies));
+            movieResultViewModel.getNetworkState().observe(this,
+                    networkState -> movieResultsAdapter.setNetworkState(networkState));
+        }
+        else {
+            if (personAdapter != null) {
+                personAdapter.clear();
+            }
+            else {
+                personResultList = new ArrayList<>();
+                personAdapter = new PersonAdapter(getContext(), personResultList);
+            }
+            personViewModel = new PersonViewModel(FilmipediaApplication.create(getContext()),
+                    query);
+            personViewModel.getPersonLiveData().observe(this,
+                    personResults -> personAdapter.submitList(personResults));
+            personViewModel.getNetworkState().observe(this,
+                    networkState -> personAdapter.setNetworkState(networkState));
+        }
     }
 }
