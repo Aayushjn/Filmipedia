@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Filmipedia</string>
 
-    <string name="hello_blank_fragment">Hello blank activity</string>
-    <string name="info_no_favorites">No Favorites Added!</string>
     <string name="trailer">Trailers</string>
     <string name="movie_details">Movie Details</string>
     <string name="action_settings">Settings</string>
@@ -23,4 +21,22 @@
     <string name="share">Share</string>
     <string name="release_date">Release Date:</string>
     <string name="rating">Rating:</string>
+    <string name="extras">Extras</string>
+    <string name="query_1">Show actor\'s movies</string>
+    <string name="query_2">Show actor\'s fellow cast mates and movies</string>
+    <string name="query_3">Show actor\'s fellow directors and movies</string>
+    <string name="query_4">Get director\'s best genres</string>
+    <string name="query_5">Get actor\'s best genres</string>
+    <string name="query_6">Get most popular genres</string>
+    <string name="query_7">Get low rated movies with high revenue</string>
+    <string name="query_8">Get movies by a production company made after a year</string>
+    <string name="query_9">Get movies directed/produced by a given director/producer</string>
+    <string name="material_dialog_title">Provide the necessary details</string>
+    <string name="actors_name">Actor\'s name:</string>
+    <string name="directors_name">Director\'s name:</string>
+    <string name="year">Year:</string>
+    <string name="company">Company:</string>
+    <string name="director">Director</string>
+    <string name="producer">Producer</string>
+    <string name="name">Name:</string>
 </resources>

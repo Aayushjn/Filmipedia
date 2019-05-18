@@ -7,38 +7,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:activity=".view.activity.BrowseFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="100">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_movie"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="57"
-            android:text="@string/movies"
-            android:textSize="50sp"
-            android:textColor="@color/movie_title"
-            android:gravity="center_horizontal"
-            android:background="@drawable/ic_movies">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        </TextView>
+            <TextView
+                android:id="@+id/text_movie"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:text="@string/movies"
+                android:textSize="50sp"
+                android:textColor="@color/movie_title"
+                android:gravity="center_horizontal"
+                android:background="@drawable/ic_movies"/>
 
-        <TextView
-            android:id="@+id/text_people"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="57"
-            android:text="@string/people"
-            android:textColor="@color/movie_title"
-            android:textSize="50sp"
-            android:gravity="center_horizontal|bottom"
-            android:background="@drawable/ic_people">
+            <TextView
+                android:id="@+id/text_people"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:text="@string/people"
+                android:textColor="@color/movie_title"
+                android:textSize="50sp"
+                android:gravity="center_horizontal|bottom"
+                android:background="@drawable/ic_people" />
 
-        </TextView>
+        </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
