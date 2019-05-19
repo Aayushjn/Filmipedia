@@ -7,14 +7,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".FilmipediaApplication"
-        android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+            android:name=".FilmipediaApplication"
+            android:allowBackup="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning" android:extractNativeLibs="false">
         <activity
             android:name=".view.activity.MainActivity"
             android:launchMode="singleTop"
@@ -38,7 +38,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.MainActivity" />
         </activity>
-        <activity android:name=".view.activity.PersonDetailActivity"
+        <activity
+            android:name=".view.activity.PersonDetailActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
