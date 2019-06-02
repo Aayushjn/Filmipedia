@@ -35,7 +35,9 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31")
+
     implementation("androidx.appcompat:appcompat:1.1.0-alpha05")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta1")
@@ -48,7 +50,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.9.0")
     kapt("com.github.bumptech.glide:compiler:4.9.0")
 
-    implementation("com.google.android.material:material:1.1.0-alpha06")
+    implementation("com.google.android.material:material:1.1.0-alpha07")
 
     implementation("com.google.code.gson:gson:2.8.5")
 
@@ -66,7 +68,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.0-M1")
 
-    androidTestImplementation("androidx.test:runner:1.1.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0-beta01")
+    androidTestImplementation("androidx.test:runner:1.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
